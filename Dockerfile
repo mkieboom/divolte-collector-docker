@@ -14,9 +14,10 @@ FROM centos
 MAINTAINER mkieboom @mapr.com
 
 #
-# Prerequisite: Install Java and initscripts
+# Prerequisite: Install Java & initscripts and create some folders for later usage
 #
 RUN yum install -y initscripts java-1.8.0-openjdk-devel && \
+    mkdir -p /divolte-scripts && \
     mkdir -p /run/lock/subsys
 
 #
@@ -36,7 +37,10 @@ RUN chown root:root /etc/divolte/divolte-env.sh
 #
 # Start Divolte Collector Service
 #
-RUN service divolte-collector start
+ADD bootstrap.sh /drill-scripts/bootstrap.sh
+RUN chown root:root /drill-scripts/bootstrap.sh && \
+    chmod 700 /drill-scripts/bootstrap.sh
+ENV BOOTSTRAP /drill-scripts/bootstrap.sh
 
 #
 # Expose the Divolte Collector click simulation web page
