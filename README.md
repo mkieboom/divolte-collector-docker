@@ -6,9 +6,11 @@ Divolte Collector Docker image
 #####Pull the image
 ```docker pull mkieboom/divolte-collector-docker```
 
-#####Run the container
-```docker run -it -p 8290:8290 mkieboom/divolte-collector-docker /divolte-scripts/bootstrap.sh```
+#####Run the container with local volumes mounted
+To store the click logs not in the Docker container itself but on the local filesystem, we can provide the docker container with local folders. The following folders are to be created on the local filesystem:
+`/divolte_clicklogs/inflight` and `/divolte_clicklogs/published`.
 
+```docker run -it -p 8290:8290 -v /divolte_clicklogs/inflight:/mnt/divolte_clicklogs/inflight -v /divolte_clicklogs/published:/mnt/divolte_clicklogs/published mkieboom/divolte-collector-docker /bin/bash```
 
 ####Access the Divolte Collector webpage to simulate clicks
 Divolte collector comes with a Web page to simulate clicks. In order to access this, the port is forwarded using the -p option in the docker run command above. To connect to the web ui please follow the steps depending on the OS on which Docker runs:
