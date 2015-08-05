@@ -44,4 +44,4 @@ RUN chown root:root /opt/divolte/divolte-collector-0.3.0/conf/divolte-collector.
 #
 EXPOSE 8290
 
-ENVIRONMENT ["/opt/divolte/divolte-collector-0.3.0/bin/divolte-collector"]
+ENTRYPOINT ["/opt/divolte/divolte-collector-0.3.0/bin/divolte-collector"]
