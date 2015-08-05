@@ -16,7 +16,8 @@ MAINTAINER mkieboom @mapr.com
 #
 # Prerequisite: Install Java and initscripts
 #
-RUN yum install -y initscripts java-1.8.0-openjdk-devel
+RUN yum install -y initscripts java-1.8.0-openjdk-devel && \
+    mkdir -p /run/lock/subsys
 
 #
 # Download and Install Divolte
@@ -24,6 +25,13 @@ RUN yum install -y initscripts java-1.8.0-openjdk-devel
 #
 RUN curl -o divolte-collector-0.3.0-1.el7.centos.noarch.rpm http://divolte-releases.s3-website-eu-west-1.amazonaws.com/divolte-collector/0.3.0/distributions/divolte-collector-0.3.0-1.el7.centos.noarch.rpm && \
     rpm -ivh divolte-collector-0.3.0-1.el7.centos.noarch.rpm
+
+#
+# Deploy the divolte-env.sh file to configure the JAVA_HOME location
+# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+#
+ADD divolte-env.sh /etc/divolte/divolte-env.sh
+RUN chown root:root /etc/divolte/divolte-env.sh
 
 #
 # Start Divolte Collector Service
