@@ -14,7 +14,8 @@ To store the click logs not in the Docker container itself but on the local file
 
 Tips:
 
-1. For MapR Hadoop users provide the volume mapping using MapR unique NFS capabilities to directory write the avro files from the Docker container to the MapR cluster, eg:
+1. For users of the MapR Hadoop Distribution, provide the volume mapping using MapR unique NFS capabilities to directly write the avro files from the Docker container to the MapR cluster, eg:
+
   `-v /mapr/clustername/divolte_clicklogs/inflight:/mnt/divolte_clicklogs/inflight`
   `-v /mapr/clustername/divolte_clicklogs/published:/mnt/divolte_clicklogs/published`
 
