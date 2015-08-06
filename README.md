@@ -12,6 +12,13 @@ To store the click logs not in the Docker container itself but on the local file
 
 ```docker run -it -p 8290:8290 -v /divolte_clicklogs/inflight:/mnt/divolte_clicklogs/inflight -v /divolte_clicklogs/published:/mnt/divolte_clicklogs/published mkieboom/divolte-collector-docker /bin/bash```
 
+Tips:
+1. For MapR Hadoop users provide the volume mapping using MapR unique NFS capabilities to directory write the avro files from the Docker container to the MapR cluster, eg:
+  `-v /mapr/clustername/divolte_clicklogs/inflight:/mnt/divolte_clicklogs/inflight`
+  `-v /mapr/clustername/divolte_clicklogs/published:/mnt/divolte_clicklogs/published`
+
+2. Provide the port mapping as `-p 80:8290` to get Divolte running on port 80 for the external world which avoids any firewall restrictions blocking traffic to port 8290 to capture the clicks.
+
 ####Access the Divolte Collector webpage to simulate clicks
 Divolte collector comes with a Web page to simulate clicks. In order to access this, the port is forwarded using the -p option in the docker run command above. To connect to the web ui please follow the steps depending on the OS on which Docker runs:
 
