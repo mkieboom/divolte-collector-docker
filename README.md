@@ -39,4 +39,4 @@ This requires version 1.7.0 of boot2docker which includes "Container Port Redire
 
 #####Analyze the click logs
 Analyze the avro files containing the click logs using the following command:
-find /tmp/*.avro -name '*divolte-tracking-*.avro' | sort | tail -n1 | xargs /usr/share/divolte/bin/avro-tools tojson --pretty
+find /mnt/divolte_clicklogs/published/*.avro -name '*divolte-tracking-*.avro' | sort | tail -n1 | xargs /opt/divolte/divolte-collector-0.3.0/bin/avro-tools tojson --pretty
